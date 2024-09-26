@@ -13,7 +13,14 @@ app.use(express.json())
     "password": "S2sdlkf@2JSLKDF2Jk$sj2f1s"
 }
 */
-let users = []
+let users = [
+  {
+    "name": "Abner",
+    "DPI": 123,
+    "email": "abnerraoficial@gmail.com",
+    "password": "123"
+  }
+]
 
 app.post("/register", function(request, response) {
     const newUser = request.body;
@@ -33,7 +40,7 @@ app.post("/login", function(request, response) {
 
     const match = users.find(e => ((e.email === newUser.email) && (e.password === newUser.password)));
     if(!match){
-        return response.status(404).json({ error: "Usuario o contraseña incorrectos" }); 
+        return response.status(401).json({ error: "Usuario o contraseña incorrectos" }); 
     }else {
         users.push(newUser)
         return response.status(200).json(match); 
